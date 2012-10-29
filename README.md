@@ -42,3 +42,15 @@ Now, anyone else present in that channel will see your messages and you will see
 theirs. Users (including you) will keep a persistent color while they are in the
 channel, but this will be randomized if either of you refresh the page.
 
+## The Point
+
+This is obviously more of an interesting experiment in what's possible with
+a small amount of code than a robust user-facing solution. I wouldn't really
+consider it a "complete" anything without a lot more input validation and
+error checking.
+
+That being said, it's a neat little project that could come in handy as a cheap
+and easy throwaway chat for anyone who wants to run one. It also shows that it's
+not too hard to add these "advanced" realtime features to existing sites,
+leveraging new technologies to increase user engagement. 
+
