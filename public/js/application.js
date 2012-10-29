@@ -18,12 +18,16 @@ $(function () {
 
   var send = function() {
     var msg = $("input[type=text]").val();
-    client.publish("/" + channel, {
-      text: msg,
-      timestamp: new Date().getTime(),
-      sender_id: user_id
-    });
-    $("input[type=text]").val("");
+    msg = $.trim(msg);
+    if ( msg != "" ) {
+      client.publish("/" + channel, {
+        text: msg,
+        timestamp: new Date().getTime(),
+        sender_id: user_id
+      });
+      $("input[type=text]").val("");
+      $("input[type=text]").focus();
+    }
   };
 
   $("input[type=button]").click(function() {
