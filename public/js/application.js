@@ -1,9 +1,10 @@
 $(function () {
 
   var client = new Faye.Client('http://localhost:8080/faye');
+  var channel = window.location.hash.substring(1) || "lobby";
   var messageDiv = $(".messages");
 
-  client.subscribe('/*', function(msg) {
+  client.subscribe('/' + channel, function(msg) {
     var html = '<p data-user="' + user_id +
       '"><small style="color: ' + user_color(msg.sender_id) + ';">' +
       moment(msg.timestamp).format("HH:mm:ss") +
@@ -12,9 +13,16 @@ $(function () {
     messageDiv.children("p").last()[0].scrollIntoView();
   });
 
+  $("#chan").html(channel);
+  window.location.hash = "#" + channel;
+
   var send = function() {
     var msg = $("input[type=text]").val();
-    client.publish("/chan", {text: msg, timestamp: new Date().getTime(), sender_id: user_id});
+    client.publish("/" + channel, {
+      text: msg,
+      timestamp: new Date().getTime(),
+      sender_id: user_id
+    });
     $("input[type=text]").val("");
   };
 
@@ -28,6 +36,8 @@ $(function () {
       send();
     }
   });
+
+  $("input[type=text]").focus();
 
 });
 
